@@ -15,8 +15,6 @@ use MyApp::Container;
 use MyApp::Test;
 use MyApp::Test::Dummy;
 
-use DBIx::QueryLog;
-
 our @EXPORT = qw/
     dummy
     dummy_auto_del
@@ -36,6 +34,10 @@ sub import {
     Test::More->export_to_level(1);
     Test::Deep->export_to_level(1);
     Test::Deep::Matcher->export_to_level(1);
+
+    if ($ENV{DEBUG}) {
+        require DBIx::QueryLog;
+    }
 
     $test = MyApp::Test->new;
 
