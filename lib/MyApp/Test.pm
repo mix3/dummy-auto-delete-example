@@ -4,6 +4,8 @@ use strict;
 use warnings;
 use utf8;
 
+use Test::mysqld;
+
 sub new { bless {}, shift }
 
 sub replace_mysqld {

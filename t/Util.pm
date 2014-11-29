@@ -8,12 +8,13 @@ use parent 'Exporter';
 use Test::More;
 use Test::Deep;
 use Test::Deep::Matcher;
-use Test::mysqld;
 
 use MyApp::Schema;
 use MyApp::Container;
 use MyApp::Test;
 use MyApp::Test::Dummy;
+
+use DBIx::QueryLog ();
 
 our @EXPORT = qw/
     dummy
@@ -36,7 +37,7 @@ sub import {
     Test::Deep::Matcher->export_to_level(1);
 
     if ($ENV{DEBUG}) {
-        require DBIx::QueryLog;
+        DBIx::QueryLog->enable;
     }
 
     $test = MyApp::Test->new;
